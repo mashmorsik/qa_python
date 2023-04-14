@@ -1,3 +1,5 @@
+import pytest
+
 from main import BooksCollector
 
 
@@ -28,10 +30,11 @@ class TestBooksCollector:
         collector.set_book_rating('Гарри Поттер и Орден Феникса', 0)
         assert collector.get_book_rating('Гарри Поттер и Орден Феникса') == 1
 
-    def test_get_book_rating(self, collector):
+    @pytest.mark.parametrize('rating_set, rating', [[9, 9], [8, 8], [-2, 1]])
+    def test_get_book_rating(self, collector, rating_set, rating):
         collector.add_new_book('Гарри Поттер и Философский Камень')
-        collector.set_book_rating('Гарри Поттер и Философский Камень', 9)
-        assert collector.get_book_rating('Гарри Поттер и Философский Камень') == 9
+        collector.set_book_rating('Гарри Поттер и Философский Камень', rating_set)
+        assert collector.get_book_rating('Гарри Поттер и Философский Камень') == rating
 
     def test_get_books_with_specific_rating_two_books_return_one(self, collector):
         collector.add_new_book('Гарри Поттер и Дары Смерти')
