@@ -1,4 +1,4 @@
-# класс для работы с книгами
+    # класс для работы с книгами
 class BooksCollector:
 
     def __init__(self):
